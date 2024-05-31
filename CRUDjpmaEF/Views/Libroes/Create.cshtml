@@ -1,0 +1,66 @@
+﻿@model CRUDjpmaEF.Models.Libro
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Libro</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Isbn" class="control-label"></label>
+                <input asp-for="Isbn" class="form-control" />
+                <span asp-validation-for="Isbn" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Titulo" class="control-label"></label>
+                <input asp-for="Titulo" class="form-control" />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descripcion" class="control-label"></label>
+                <input asp-for="Descripcion" class="form-control" />
+                <span asp-validation-for="Descripcion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NombreAutor" class="control-label"></label>
+                <input asp-for="NombreAutor" class="form-control" />
+                <span asp-validation-for="NombreAutor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Publicacion" class="control-label"></label>
+                <input asp-for="Publicacion" class="form-control" />
+                <span asp-validation-for="Publicacion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaRegistro" class="control-label"></label>
+                <input asp-for="FechaRegistro" class="form-control" />
+                <span asp-validation-for="FechaRegistro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CodigoCategoria" class="control-label"></label>
+                <select asp-for="CodigoCategoria" class ="form-control" asp-items="ViewBag.CodigoCategoria"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="NitEditorial" class="control-label"></label>
+                <select asp-for="NitEditorial" class ="form-control" asp-items="ViewBag.NitEditorial"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

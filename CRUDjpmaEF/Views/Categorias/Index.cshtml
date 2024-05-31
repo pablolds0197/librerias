@@ -1,0 +1,58 @@
+﻿@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@model X.PagedList.IPagedList<CRUDjpmaEF.Models.Categoria>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Categorias</h1>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-success" style="background-color: #ff5722; color: #ffffff; border-radius: 8px; text-shadow: 1px 1px 1px #333; border: 2px solid #ff5722;">Crear Nueva Categoría</a>
+</p>
+<form asp-controller="Categorias" asp-action="Index">
+    <p>
+        Buscar:<input type="text" name="buscar" class="form-text" />
+        <input type="submit" value="buscar" class="btn btn-sn btn-dark" />
+    </p>
+</form>
+<table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Nombre)
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Acciones">
+                        <a href="@Url.Action("Edit", new { id = item.CodigoCategoria })" class="btn btn-primary">Editar</a>
+                        <a href="@Url.Action("Details", new { id = item.CodigoCategoria })" class="btn btn-info">Ver Detalles</a>
+                        <a href="@Url.Action("Delete", new { id = item.CodigoCategoria })" class="btn btn-danger delete-link" onclick="return confirm('¿Estás seguro de que deseas eliminar este elemento?')">Eliminar</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="text-center">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            @Html.PagedListPager(Model, pagina => Url.Action("Index", new { pagina }),
+                     new PagedListRenderOptions
+            {
+                LiElementClasses = new List<string> { "page-item" },
+                PageClasses = new List<string> { "page-link" }
+            })
+        </ul>
+    </nav>
+</div>

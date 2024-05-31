@@ -1,0 +1,82 @@
+﻿@using X.PagedList.Mvc.Core
+@using X.PagedList.Web.Common
+@model X.PagedList.IPagedList<CRUDjpmaEF.Models.Editoriale>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Editoriales</h1>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-lg btn-custom" style="background-color: #ff5722; color: #ffffff; border-radius: 10px; text-shadow: 1px 1px 1px #333;">Crear Nueva Editorial</a>
+</p>
+<form asp-controller="Editoriales" asp-action="Index">
+    <p>
+        Buscar:<input type="text" name="buscar" class="form-text" />
+        <input type="submit" value="buscar" class="btn btn-sn btn-dark" />
+    </p>
+</form>
+<table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Nombres)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Telefono)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Direccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Sitioweb)
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombres)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefono)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Direccion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sitioweb)
+                </td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Acciones">
+                        <a href="@Url.Action("Edit", new { id = item.Nit })" class="btn btn-primary">Editar</a>
+                        <a href="@Url.Action("Details", new { id = item.Nit })" class="btn btn-info">Detalles</a>
+                        <a href="@Url.Action("Delete", new { id = item.Nit })" class="btn btn-danger delete-link" onclick="return confirm('¿Estás seguro de que deseas eliminar este elemento?')">Eliminar</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div class="text-center">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            @Html.PagedListPager(Model, pagina => Url.Action("Index", new { pagina }),
+                     new PagedListRenderOptions
+            {
+                LiElementClasses = new List<string> { "page-item" },
+                PageClasses = new List<string> { "page-link" }
+            })
+        </ul>
+    </nav>
+</div>
